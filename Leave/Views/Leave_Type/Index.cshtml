@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Leave.Models.Leave_type_view_model>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Leave Type List</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success "><i class="fa-solid fa-plus"></i>  Create New</a>
+</p>
+<table id="tblData" class="table">          @*------added from datatables.net-----*@
+    <thead style=" background-light blue ">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name) @*Leave Type*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_created) @*Date Created*@
+            </th>
+            <th> Modify</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date_created)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning "><i class="fa-duotone fa-pen-to-square"></i></a> | &nbsp; 
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary "><i class="fa-duotone fa-square-info"></i> </a> |&nbsp;
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"> <i class="fa-duotone fa-file-xmark"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+$(document).ready(function () {
+    $('#tblData').DataTable();
+});
+    </script>  @*---- can include in www.roots .js folder as java script file (easy when different table styles)*@
+}
